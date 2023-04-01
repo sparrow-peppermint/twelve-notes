@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 const Black = styled.button`
@@ -33,14 +33,28 @@ const White = styled.button`
 type Props = {
   color: string
   note: string
-  clickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void
+  key: string
+  clickHandler: () => void
 }
 
-const Note: React.FC<Props> = ({ color, note, clickHandler }) =>
-  color == 'white' ? (
+const Note: React.FC<Props> = ({ color, note, key, clickHandler }) => {
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === key) {
+        clickHandler()
+      }
+    }
+    window.addEventListener('keydown', handleKeyPress)
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [clickHandler, key])
+
+  return color == 'white' ? (
     <White value={note} onClick={clickHandler} />
   ) : (
     <Black value={note} onClick={clickHandler} />
   )
+}
 
 export default Note

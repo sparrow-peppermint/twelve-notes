@@ -12,22 +12,38 @@ const Wraper = styled.div`
 
 type Props = {
   notes: NoteType[]
-  clickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void
+  clickHandler: (note: string) => void
 }
 
-const Octave: React.FC<Props> = ({ notes, clickHandler }) => (
-  <Wraper>
-    <div>
-      {notes.map((element: NoteType) => (
-        <Note
-          key={element.note}
-          color={element.color}
-          note={element.note}
-          clickHandler={clickHandler}
-        />
-      ))}
-    </div>
-  </Wraper>
-)
+const Octave: React.FC<Props> = ({ notes, clickHandler }) => {
+  React.useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      notes.forEach((note) => {
+        if (e.key === note.key) {
+          clickHandler(note.note)
+        }
+      })
+    }
+    window.addEventListener('keydown', handleKeyPress)
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [clickHandler, notes])
+
+  return (
+    <Wraper>
+      <div>
+        {notes.map((element: NoteType) => (
+          <Note
+            color={element.color}
+            note={element.note}
+            clickHandler={() => clickHandler(element.note)}
+            key={element.key}
+          />
+        ))}
+      </div>
+    </Wraper>
+  )
+}
 
 export default Octave
