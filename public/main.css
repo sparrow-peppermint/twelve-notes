@@ -1,0 +1,41 @@
+@font-face {
+  font-family: AlienRavager ;
+  src: url("fonts/alien-ravager-font/AlienRavager-0WYod.ttf");
+}
+
+@font-face {
+  font-family: Moonhouse;
+  src: url("fonts/moonhouse-font/Moonhouse-yE5M.ttf");
+}
+
+h1 {
+  font-size: 120px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-align: center;
+  margin-top: 5%;
+  font-family: AlienRavager;
+}
+
+h2 {
+  font-size: 50px;
+  font-weight: 600;
+  background-size: 250px;
+  background-color: aquamarine;
+  background-repeat: repeat;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-align: center;
+  font-family: Moonhouse;
+}
+
+body {
+  background-image: url("images/space.jpeg");
+  background-size: 70%;
+  background-color: #4e1f9e;
+}
+
